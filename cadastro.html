@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Hotel Atmosfera</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main>
+        <section class="cadastro" id="cadastro">
+            <form class="bloco" id="form">
+                <div class="header-bloco">
+                    <div style="display: flex;">
+                        <p>Insira seus dados</p>
+                        <img class="emoji" src="https://cdn.icon-icons.com/icons2/2656/PNG/512/winking_emo_emoticon_face_emoji_icon_161000.png" alt="emoji piscando">
+                    </div>
+                    <img src="./assets/img/logo.webp" alt="Logo do Hotel Atmosfera">
+                </div>
+                <div class="dados">
+                    <div class="label-input">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required autocomplete="off">
+                    </div>
+                    <div class="label-input">
+                        <label for="data">Data de Nascimento:</label>
+                        <input type="date" name="data" id="data" required>
+                    </div>
+                    <div class="label-input">
+                        <label for="local">Local:</label>
+                        <input type="text" name="local" id="local" placeholder="Nome do Local" required autocomplete="off">
+                    </div>
+                </div>
+                
+                <button class="botao-padrao" id="cadastrar">CADASTRAR <i class="fa-solid fa-arrow-right" type="submit"></i></button>
+                
+                <div class="keyboard">
+                    <div class="row">
+                        <button class="btn">1</button>
+                        <button class="btn">2</button>
+                        <button class="btn">3</button>
+                        <button class="btn">4</button>
+                        <button class="btn">5</button>
+                        <button class="btn">6</button>
+                        <button class="btn">7</button>
+                        <button class="btn">8</button>
+                        <button class="btn">9</button>
+                        <button class="btn">0</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn">q</button>
+                        <button class="btn">w</button>
+                        <button class="btn">e</button>
+                        <button class="btn">r</button>
+                        <button class="btn">t</button>
+                        <button class="btn">y</button>
+                        <button class="btn">u</button>
+                        <button class="btn">i</button>
+                        <button class="btn">o</button>
+                        <button class="btn">p</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn">a</button>
+                        <button class="btn">s</button>
+                        <button class="btn">d</button>
+                        <button class="btn">f</button>
+                        <button class="btn">g</button>
+                        <button class="btn">h</button>
+                        <button class="btn">j</button>
+                        <button class="btn">k</button>
+                        <button class="btn">l</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn">z</button>
+                        <button class="btn">x</button>
+                        <button class="btn">c</button>
+                        <button class="btn">v</button>
+                        <button class="btn">b</button>
+                        <button class="btn">n</button>
+                        <button class="btn">m</button>
+                        <button class="shift">Shift</button>
+                    </div>
+                    <div class="row">
+                        <button class="space">Space</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Hotel Atmosfera</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <main>
+        <section class="finalizado" id="finalizado">
+            <div class="bloco">
+                <div class="bloco-finalizado">
+                    <div class="wrapper"> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
+                    <p>Seu cadastro foi concluído com sucesso!</p>
+                </div>
+                <a href="index.html">
+                    <button class="botao-padrao" id="continuar">PAGINA INICIAL <i class="fa-solid fa-house"></i></button>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Função para redirecionar para a página inicial após 30 segundos
+            function redirectToHomePage() {
+                setTimeout(function () {
+                    window.location.href = './index.html';
+                }, 30000);
+            }
+
+            redirectToHomePage();
+        });
+    </script>
+</body>
+
+</html>
