@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputCPF = document.getElementById('cpf');
     const inputSala = document.getElementById('sala');
     const inputNome = document.getElementById('nome');
+    const inputData = document.getElementById('data');
     const keyboardCPF = document.querySelector('.keyboardcpf');
     const keyboardContainer = document.querySelector('.keyboard');
     let selectedInput = null;
@@ -10,14 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function showKeyboard(keyboard) {
         hideKeyboards();
         keyboard.classList.add('active');
+        console.log('Keyboard shown:', keyboard);
     }
 
     function hideKeyboards() {
         keyboardCPF.classList.remove('active');
         keyboardContainer.classList.remove('active');
+        console.log('Keyboards hidden');
     }
 
     function formatarCPF(input) {
+
         let cpf = input.value.replace(/\D/g, '');
         if (cpf.length > 11) {
             cpf = cpf.slice(0, 11);
@@ -30,14 +34,33 @@ document.addEventListener('DOMContentLoaded', function () {
         input.value = cpf;
     }
 
+    function formatarData(input) {
+      
+        let data = input.value.replace(/\D/g, '');
+        if (data.length > 8) {
+            data = data.slice(0, 8);
+        }
+        if (data.length <= 8) {
+            data = data.replace(/(\d{2})(\d)/, '$1/$2');
+            data = data.replace(/(\d{2})(\d)/, '$1/$2');
+            data = data.replace(/(\d{2})(\d{2})$/, '$1$2');
+        }
+        input.value = data;
+    }
+
     inputCPF.addEventListener('click', function () {
+        selectedInput = this;
+        showKeyboard(keyboardCPF);
+    });
+
+    inputData.addEventListener('click', function () {
         selectedInput = this;
         showKeyboard(keyboardCPF);
     });
 
     inputSala.addEventListener('click', function () {
         selectedInput = this;
-        showKeyboard(keyboardContainer);
+        showKeyboard(keyboardCPF);
     });
 
     inputNome.addEventListener('click', function () {
@@ -50,14 +73,19 @@ document.addEventListener('DOMContentLoaded', function () {
         showKeyboard(keyboardCPF);
     });
 
+    inputData.addEventListener('focus', function () {
+        selectedInput = this;
+        showKeyboard(keyboardCPF);
+    });
+
     inputSala.addEventListener('focus', function () {
         selectedInput = this;
-        showKeyboard(keyboardContainer);
+        showKeyboard(keyboardCPF);
     });
 
     inputNome.addEventListener('focus', function () {
         selectedInput = this;
-        showKeyboard(keyboardContainer);   
+        showKeyboard(keyboardContainer);
     });
 
     document.addEventListener('click', function (event) {
@@ -65,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
             !keyboardCPF.contains(event.target) && 
             event.target !== inputCPF && 
             event.target !== inputSala && 
-            event.target !== inputNome) {
+            event.target !== inputNome &&
+            event.target !== inputData) {
             hideKeyboards();
         }
     });
@@ -82,8 +111,11 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', () => {
             if (selectedInput) {
                 selectedInput.value += btn.innerText;
-                if (selectedInput === inputCPF) {
+                if (selectedInput == inputCPF) {
                     formatarCPF(selectedInput);
+                }
+                if (selectedInput == inputData) {
+                    formatarData(selectedInput);
                 }
             }
         });
@@ -133,11 +165,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const local = document.getElementById('local').value;
+    
+    if(inputCPF.value.length < 14){
+        alert('Por favor, preencha o campo de CPF corretamente.');
+        return;
+    }
+    const nome = document.getElementById('nome').value;
+    const sala = document.getElementById('sala').value;
     const data = document.getElementById('data').value;
     const cpf = document.getElementById('cpf').value;
     const dados = {
-        local,
+        nome,
+        sala,
         data,
         cpf
     };
