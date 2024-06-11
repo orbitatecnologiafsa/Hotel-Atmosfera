@@ -131,19 +131,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const form = document.getElementById('form');
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const sala = document.getElementById('sala').value;
-        const data = document.getElementById('data').value;
-        const nome = document.getElementById('nome').value;
-        const cpf = document.getElementById('cpf').value;
-        const dados = {
-            nome,
-            sala,
-            data,
-            cpf
-        };
-        window.location.href = './foto.html';
-    });
-
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const local = document.getElementById('local').value;
+    const data = document.getElementById('data').value;
+    const cpf = document.getElementById('cpf').value;
+    const dados = {
+        local,
+        data,
+        cpf
+    };
+    window.location.href = './foto.html';
 });
