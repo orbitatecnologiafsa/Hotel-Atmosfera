@@ -142,4 +142,5 @@ form.addEventListener('submit', (event) => {
         cpf
     };
     window.location.href = './foto.html';
+    });
 });
