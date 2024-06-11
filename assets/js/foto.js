@@ -30,8 +30,6 @@ fotografar.addEventListener('click', () => {
     video.style.display = 'none';
     fotografar.style.display = 'none';
 
-
-
     // mostrar a foto tirada no canvas
     div_btn_enviar_cancelar.style.display = 'flex';
     canvas.style.display = 'block';
