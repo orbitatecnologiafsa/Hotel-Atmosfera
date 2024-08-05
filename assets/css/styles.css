@@ -85,6 +85,7 @@ section {
     letter-spacing: .8px;
     line-height: 20px;
     margin: 0;
+    min-width: 300px;
     outline: none;
     overflow: visible;
     padding: 13px 16px;
@@ -131,6 +132,69 @@ section {
     border-width: 4px 0 0;
     background: none;
 }
+
+.botao-vermelho {
+    appearance: button;
+    background-color: #af1414;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: din-round, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 13px 16px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter .2s;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 40%;
+}
+
+.botao-vermelho:after {
+    background-clip: padding-box;
+    background-color: #d41616;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    bottom: -4px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.botao-vermelho:main,
+.botao-vermelho:focus {
+    user-select: auto;
+}
+
+.botao-vermelho:hover:not(:disabled) {
+    filter: brightness(1.1);
+    -webkit-filter: brightness(1.1);
+}
+
+.botao-vermelho:disabled {
+    cursor: auto;
+}
+
+.botao-vermelho:active {
+    border-width: 4px 0 0;
+    background: none;
+}
 /* --FIM ESTILIZAÇÃO GERAL-- */
 
 
@@ -164,11 +228,10 @@ section {
 /* --TELA DE CADASTRO-- */
 .dados {
     position: relative;
-    bottom: 100px;
+    bottom: 60px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    gap: 30px;
 }
 
 .dados .label-input {
@@ -194,6 +257,25 @@ section {
     box-sizing: border-box;
 }
 
+.dados .dados-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.dados .dados-content input:not([name="sala"]) {
+    min-width: 500px;
+}
+
+.dados .dados-content input[name="nome"] {
+    width: 700px;
+}
+
+.dados .dados-content input[name="sala"] {
+    width: 300px;
+}
+
 .dados input[type="text"]:focus,
 .dados input[type="date"]:focus {
     border-color: #1899D6;
@@ -206,9 +288,12 @@ section {
     color: #222222;
 }
 
-.cadastro .botao-padrao {
+.cadastro .footer-cadastro {
     position: relative;
-    bottom: 100px;
+    bottom: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .keyboard, .keyboardcpf {
