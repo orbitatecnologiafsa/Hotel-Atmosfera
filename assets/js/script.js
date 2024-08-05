@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     inputSala.addEventListener('click', function () {
         selectedInput = this;
-        showKeyboard(keyboardCPF);
+        showKeyboard(keyboardContainer);
     });
 
     inputNome.addEventListener('click', function () {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     inputSala.addEventListener('focus', function () {
         selectedInput = this;
-        showKeyboard(keyboardCPF);
+        showKeyboard(keyboardContainer);
     });
 
     inputNome.addEventListener('focus', function () {
