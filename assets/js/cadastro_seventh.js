@@ -1,11 +1,16 @@
 const axios = require('axios');
 const base64Img = require('base64-img');
 const express = require('express');
-
+const cors = require('cors');
 
 const app = express();
-app.use(express.json());
-
+app.use(express.json({ limit: '10mb' })); 
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(cors({
+    origin: '*', // Permite todas as origens
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Permite todos os métodos HTTP
+    allowedHeaders: ['Content-Type', 'Authorization'] // Permite cabeçalhos específicos
+}));
 //OBJETO PESSOA:
 
 const pessoa = { 
@@ -34,8 +39,6 @@ app.post('/api/cadastrarPessoa', (req, res) => {
     pessoa.company = sala;
 
     logar(imagem);
-    // Lógica de salvar no banco de dados, etc.
-
     res.status(200).json({ message: 'Pessoa cadastrada com sucesso!' });
 });
 
@@ -84,8 +87,8 @@ async function cadastrarPessoa(imagem) {
     try {
         const response = await axios.post(peopleURL, pessoa, {
         headers: {
-            'Content-Type': 'application/json',  // Define o tipo de conteúdo como JSON
-            Cookie: sessionCookie               // Passa o cookie de autenticação
+            'Content-Type': 'application/json',
+            Cookie: sessionCookie
         }
         });
         // Exibe a resposta
