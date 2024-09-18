@@ -161,7 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Elemento do campo de CPF não encontrado.');
     }
 
-    const form = document.getElementById('form');
+const form = document.getElementById('form');
+
+const dados = {
+    name: '',
+    sala: '',
+    data: '',
+    cpf: ''
+}
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -174,12 +181,19 @@ form.addEventListener('submit', (event) => {
     const sala = document.getElementById('sala').value;
     const data = document.getElementById('data').value;
     const cpf = document.getElementById('cpf').value;
-    const dados = {
-        nome,
-        sala,
-        data,
-        cpf
-    };
+    
+    dados.name = nome;
+    dados.sala = sala;
+    dados.data = converterParaISO(data);
+    dados.cpf = cpf;
+    
+    localStorage.setItem('dados', JSON.stringify(dados));
     window.location.href = './foto.html';
     });
 });
+
+function converterParaISO(dataStr) {
+    const [dia, mes, ano] = dataStr.split('/');
+    const data = new Date(`${ano}-${mes}-${dia}T00:00:00`);
+    return data.toISOString();
+}
