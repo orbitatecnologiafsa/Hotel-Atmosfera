@@ -399,6 +399,31 @@ section {
     justify-content: space-between;
     align-items: center;
 }
+.botao-voltar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #8e1a0d; /* Usando uma cor da sua paleta */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.botao-voltar:hover {
+    background-color: #ad1e10; /* Uma cor mais clara da paleta para o hover */
+}
+
+.botao-voltar i {
+    margin-right: 8px;
+}
+
 /* --FIM TELA FOTO-- */
 
 

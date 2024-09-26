@@ -138,11 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
 
-    document.querySelector('.space').addEventListener('click', () => {
+    document.querySelector('.space').addEventListener('click', (event) => {
+        event.preventDefault();
         if (selectedInput) {
             selectedInput.value += ' ';
         }
     });
+    
 
     document.querySelector('.shift').addEventListener('click', () => {
         buttons.forEach(btn => {

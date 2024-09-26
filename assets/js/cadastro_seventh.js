@@ -29,11 +29,11 @@ const pessoa = {
 //SERVIDOR
 
 app.post('/api/cadastrarPessoa', (req, res) => {
-    const { nome, sala, data, cpf, imagem } = req.body;
+    const { name, sala, data, cpf, imagem } = req.body;
     
     console.log('Pessoa recebida:', req.body);
 
-    pessoa.name = nome;
+    pessoa.name = name;
     pessoa.birthday = data;
     pessoa.cpf = cpf;
     pessoa.company = sala;
@@ -100,48 +100,38 @@ async function cadastrarPessoa(imagem) {
     }
 }
 
-async function enviarImagemPessoa(id,imagem) {
+async function enviarImagemPessoa(id, imagem) {
     try {
-    
         const imageUploadURL = `http://10.1.1.101:8080/api/accounts/1000/people/${id}/image`;
-        const caminhoImagem = imagem;
-    
-        // Converte a imagem para Base64
-        base64Img.base64(caminhoImagem, function(err, data) {
-            if (err) {
-                console.error('Erro ao converter imagem para Base64:', err);
-                return;
-            }
-    
-            // Cria o corpo da requisição com a imagem em Base64
-            const requestBody = {
-            base64: data.split(',')[1] // Remove o prefixo data:image/jpeg;base64, da string Base64
-            };
-    
-            // Faz a requisição POST para enviar a imagem
-            axios.put(imageUploadURL, requestBody, {
+        
+        // Remove o prefixo "data:image/png;base64," da string base64
+        const base64Image = imagem.split(',')[1];
+
+        // Cria o corpo da requisição com a imagem em Base64
+        const requestBody = {
+            base64: base64Image
+        };
+
+        // Faz a requisição PUT para enviar a imagem
+        const response = await axios.put(imageUploadURL, requestBody, {
             headers: {
                 'Content-Type': 'application/json',
                 'Cookie': sessionCookie, // Passa o cookie de autenticação
             }
-            })
-            .then(response => {
-            // Exibe a resposta de sucesso
-                console.log('Imagem enviada com sucesso:', response.data);
-                cadastrarAcesso(id);
-            })
-            .catch(error => {
-                if (error.response) {
-                    console.error('Erro ao enviar imagem:', error.response.status, error.response.data);
-                } else {
-                    console.error('Erro ao enviar imagem:', error.message);
-                }
-            });
         });
+        
+        // Exibe a resposta de sucesso
+        console.log('Imagem enviada com sucesso:', response.data);
+        cadastrarAcesso(id);
     } catch (error) {
-        console.error('Erro na função enviarImagemPessoa:', error.message);
+        if (error.response) {
+            console.error('Erro ao enviar imagem:', error.response.status, error.response.data);
+        } else {
+            console.error('Erro ao enviar imagem:', error.message);
+        }
     }
 }
+
 async function cadastrarAcesso(id) {
     try {
 
@@ -154,7 +144,7 @@ async function cadastrarAcesso(id) {
             active: true,
             type: 3,
             startDate: "2024-09-17T18:04:23.552Z",
-            validity: "2024-09-18T18:04:23.552Z"
+            validity: "2024-09-26T18:04:23.552Z"
         };
     
           const response = await axios.post(`http://10.1.1.101:8080/api/accounts/${accountId}/people/${personId}/access`,

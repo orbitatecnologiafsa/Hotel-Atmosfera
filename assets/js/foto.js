@@ -6,8 +6,13 @@ const fotografar = document.getElementById('fotografar');
 const div_btn_enviar_cancelar = document.getElementById('btn-cancelar-enviar');
 const enviar = document.getElementById('enviar');
 const cancelar = document.getElementById('cancelar');
+
+// Define a resolução do canvas para ser maior, aumentando a qualidade da foto
+canvas.width = 1920; // Largura maior para uma imagem de alta resolução (Full HD)
+canvas.height = 1080; // Altura correspondente
+
 // Solicita permissão para usar a câmera
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: { width: 1920, height: 1080 } }) // Solicita resolução de vídeo mais alta
     .then((stream) => {
         // Exibe o feed da câmera no elemento de vídeo
         video.srcObject = stream;
@@ -19,25 +24,23 @@ navigator.mediaDevices.getUserMedia({ video: true })
 
 // Adiciona um evento ao botão para tirar a foto
 fotografar.addEventListener('click', () => {
-
     // Desenha o quadro atual do vídeo no canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Salva a imagem como data URL e exibe a imagem no console (pode ser ajustado para salvar ou enviar a imagem)
-    const dataUrl = canvas.toDataURL('image/jpeg');
+    // Salva a imagem como data URL com qualidade de 0.9 (90% de qualidade para JPEG)
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.9); // Ajusta a qualidade para 90%
     console.log(dataUrl);
 
     video.style.display = 'none';
     fotografar.style.display = 'none';
 
-    // mostrar a foto tirada no canvas
+    // Mostrar a foto tirada no canvas
     div_btn_enviar_cancelar.style.display = 'flex';
     canvas.style.display = 'block';
 });
 
 enviar.addEventListener('click', async () => {
-
-    const dataUrl = canvas.toDataURL('image/png');
+    const dataUrl = canvas.toDataURL('image/png', 1.0); // Use 1.0 para a melhor qualidade
 
     const dados = JSON.parse(localStorage.getItem('dados'));
 
