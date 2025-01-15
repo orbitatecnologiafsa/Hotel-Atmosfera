@@ -264,6 +264,16 @@ section {
     gap: 20px;
 }
 
+@media screen and (orientation: portrait) {
+    .dados .dados-content {
+        display: flex;
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        align-items: stretch; /* Inputs ocupam toda a largura disponível */
+        gap: 20px; /* Espaçamento entre os elementos */
+    }
+}
+
+
 .dados .dados-content input:not([name="sala"]) {
     min-width: 500px;
 }
@@ -488,3 +498,4 @@ section {
     }
 }
 /* --FIM TELA FINAL-- */
+
