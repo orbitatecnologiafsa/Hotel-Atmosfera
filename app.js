@@ -33,6 +33,8 @@ app.get('/finalizado', (req, res) => {
     res.sendFile(path.join(__dirname, 'finalizado.html')); // Página finalizado
 });
 
+
+
 // OBJETO PESSOA
 const pessoa = {
     name: "",
