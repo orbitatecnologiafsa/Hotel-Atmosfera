@@ -59,7 +59,7 @@ enviar.addEventListener('click', async () => {
         if (response.ok) {
             const resultado = await response.json();
             console.log('Pessoa cadastrada com sucesso:', resultado);
-            window.location.href = './finalizado.html';
+            window.location.href = '/finalizado';
         } else {
             console.error('Erro ao cadastrar pessoa:', response.statusText);
         }

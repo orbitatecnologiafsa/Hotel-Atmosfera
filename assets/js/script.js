@@ -190,7 +190,7 @@ form.addEventListener('submit', (event) => {
     dados.cpf = cpf;
     
     localStorage.setItem('dados', JSON.stringify(dados));
-    window.location.href = './foto.html';
+    window.location.href = '/foto';
     });
 });
 
