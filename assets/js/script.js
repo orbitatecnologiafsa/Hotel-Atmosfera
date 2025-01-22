@@ -144,14 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedInput.value += ' ';
         }
     });
-    
 
-    document.querySelector('.shift').addEventListener('click', () => {
-        buttons.forEach(btn => {
-            btn.classList.toggle('upper');
-            btn.innerText = btn.classList.contains('upper') ? btn.innerText.toUpperCase() : btn.innerText.toLowerCase();
-        });
-    });
 
     const cpfInput = document.getElementById('cpf');
 

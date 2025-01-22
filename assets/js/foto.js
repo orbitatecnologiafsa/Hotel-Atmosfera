@@ -19,7 +19,7 @@ navigator.mediaDevices.getUserMedia({ video: { width: 1920, height: 1080 } }) //
         video.play();
     })
     .catch((err) => {
-        console.error(`Erro ao acessar a câmera: ${err}`);
+        console.error('Erro ao acessar a câmera: ${err}');
     });
 
 // Adiciona um evento ao botão para tirar a foto

@@ -71,8 +71,8 @@ app.post('/api/cadastrarPessoa', (req, res) => {
 });
 
 // Informações de login
-const loginURL = 'http://10.1.1.101:8080/api/login';
-const peopleURL = 'http://10.1.1.101:8080/api/accounts/1000/people';
+const loginURL = 'http://10.1.1.21:8080/api/login';
+const peopleURL = 'http://10.1.1.21:8080/api/accounts/1000/people';
 const loginData = {
     username: 'admin',
     password: 'atmosfera123'
@@ -90,7 +90,7 @@ async function logar(imagem) {
         if (setCookieHeader) {
             sessionCookie = setCookieHeader.find(cookie => cookie.startsWith('Seventh.Auth'));
             console.log('Cookie de sessão obtido:', sessionCookie);
-            await cadastrarPessoa(imagem);
+            await verificarCadastro(pessoa.cpf, imagem);
         } else {
             throw new Error('Cookie de sessão não foi retornado');
         }
@@ -99,6 +99,42 @@ async function logar(imagem) {
         throw error;
     }
 }
+// Funcao para verificar se ja há a pessoa cadastrada
+
+async function verificarCadastro(cpf, imagem) {
+    try {
+        const response = await axios.get(`${peopleURL}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': sessionCookie,
+            },
+            params: {
+                'pagination.filters.cpf': cpf, // Filtra diretamente pelo CPF
+            },
+        });
+
+        const pessoas = response.data.people;
+
+        if (!pessoas || pessoas.length === 0) {
+            console.log('Pessoa não cadastrada');
+            console.log({ cpf });
+            cadastrarPessoa(imagem);
+            return;
+        }
+
+        const pessoa = pessoas[0]; // Como estamos filtrando por CPF, deve retornar no máximo uma pessoa.
+
+        if (pessoa) {
+            console.log('Pessoa já cadastrada e está ativa:', pessoa);
+            cadastrarAcesso(pessoa.id);
+        } 
+        
+    } catch (error) {
+        console.error('Erro ao verificar cadastro:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
+
 
 // Função para cadastrar pessoa
 async function cadastrarPessoa(imagem) {
@@ -121,7 +157,7 @@ async function cadastrarPessoa(imagem) {
 // Função para enviar imagem da pessoa
 async function enviarImagemPessoa(id, imagem) {
     try {
-        const imageUploadURL = `http://10.1.1.101:8080/api/accounts/1000/people/${id}/image`;
+        const imageUploadURL = `http://10.1.1.21:8080/api/accounts/1000/people/${id}/image`;
         const base64Image = imagem.split(',')[1];
 
         const requestBody = { base64: base64Image };
@@ -151,11 +187,11 @@ async function cadastrarAcesso(id) {
             pin: null,
             active: true,
             type: 3,
-            startDate: "2028-09-17T18:04:23.552Z",
+            startDate: "2021-09-17T18:04:23.552Z",
             validity: "2028-09-26T18:04:23.552Z"
         };
 
-        const response = await axios.post(`http://10.1.1.101:8080/api/accounts/${accountId}/people/${personId}/access`, accessData, {
+        const response = await axios.post(`http://10.1.1.21:8080/api/accounts/${accountId}/people/${personId}/access`, accessData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Cookie': sessionCookie
@@ -173,7 +209,7 @@ async function cadastrarAcesso(id) {
 // Função para sincronizar dispositivo
 async function sincronizarDispositivo(accountId, personId) {
     try {
-        const syncUrl = `http://10.1.1.101:8080/api/accounts/${accountId}/people/${personId}/synchronize`;
+        const syncUrl = `http://10.1.1.21:8080/api/accounts/${accountId}/people/${personId}/synchronize`;
 
         const syncResponse = await axios.put(syncUrl, {}, {
             headers: {
