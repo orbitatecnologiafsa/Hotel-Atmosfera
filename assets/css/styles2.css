@@ -1,0 +1,57 @@
+#bloco-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.card {
+    width: 40%;
+    height: 50%;
+    border-radius: 15px;
+    box-shadow: 1px 1px 100px rgba(0, 0, 0, 0.4);
+    background-color: #FFFFFF;
+    color: black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Reduz o tamanho geral do modal */
+.swal-custom-popup {
+    width: 50vw !important; /* Limita a largura */
+    padding: 20px !important;    /* Ajusta o espaçamento interno */
+}
+
+/* Estiliza o título com tamanho de fonte menor */
+.swal-custom-title {
+    font-size: 26px !important;
+    font-weight: bold;
+    margin-bottom: 10px !important;
+}
+
+/* Ajusta o tamanho do texto */
+.swal-custom-text {
+    font-size: 24px !important;
+    line-height: 1.5 !important;
+}
+
+/* Botões personalizados */
+.swal-custom-confirm {
+    background-color: #146eb4 !important;
+    color: white !important;
+    font-size: 24px !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+}
+
+.swal-custom-cancel {
+    background-color: #8e1a0d !important;
+    color: white !important;
+    font-size: 24px !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Hotel Atmosfera</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <main>
+        <section class="cadastro" id="cadastro">
+            <form class="bloco" id="form">
+                <div class="header-bloco">
+                    <div style="display: flex; width: 50%;">
+                        <p>Insira seus dados</p>
+                    </div>
+                    
+                    <img src="./assets/img/logo.webp" alt="Logo do Hotel Atmosfera">
+                </div>
+                <div class="dados">
+                    <div class="dados-content">
+                        <div class="label-input">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required
+                                autocomplete="off" maxlength="14" minlength="14">
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-cadastro">
+                    <button class="botao-vermelho" type="reset" id="limpar">LIMPAR <i class="fa-solid fa-delete-left"></i></button> 
+
+                    <button class="botao-padrao" id="cadastrar">Reativar <i class="fa-solid fa-arrow-right" type="submit"></i></button>
+                </div>
+
+                <div class="keyboardcpf">
+                    <div class="row" id="cpf_keyboard">
+                        <button class="btn upper" type="button">1</button>
+                        <button class="btn upper" type="button">2</button>
+                        <button class="btn upper" type="button">3</button>
+                        <br>
+                        <button class="btn upper" type="button">4</button>
+                        <button class="btn upper" type="button">5</button>
+                        <button class="btn upper" type="button">6</button>
+                        <br>
+                        <button class="btn upper" type="button">7</button>
+                        <button class="btn upper" type="button">8</button>
+                        <button class="btn upper" type="button">9</button>
+                        <br>
+                        <button class="btn upper" type="button">0</button>
+                        <button class="delete" type="button"><i class="fa-solid fa-delete-left"></i></button>
+                    </div>
+                </div>
+                <div class="keyboard">
+                    <div class="row">
+                        <button class="btn upper" type="button">1</button>
+                        <button class="btn upper" type="button">2</button>
+                        <button class="btn upper" type="button">3</button>
+                        <button class="btn upper" type="button">4</button>
+                        <button class="btn upper" type="button">5</button>
+                        <button class="btn upper" type="button">6</button>
+                        <button class="btn upper" type="button">7</button>
+                        <button class="btn upper" type="button">8</button>
+                        <button class="btn upper" type="button">9</button>
+                        <button class="btn upper" type="button">0</button>
+                       
+                    </div>
+                    <div class="row">
+                        <button class="btn upper" type="button">q</button>
+                        <button class="btn upper" type="button">w</button>
+                        <button class="btn upper" type="button">e</button>
+                        <button class="btn upper" type="button">r</button>
+                        <button class="btn upper" type="button">t</button>
+                        <button class="btn upper" type="button">y</button>
+                        <button class="btn upper" type="button">u</button>
+                        <button class="btn upper" type="button">i</button>
+                        <button class="btn upper" type="button">o</button>
+                        <button class="btn upper" type="button">p</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn upper" type="button">a</button>
+                        <button class="btn upper" type="button">s</button>
+                        <button class="btn upper" type="button">d</button>
+                        <button class="btn upper" type="button">f</button>
+                        <button class="btn upper" type="button">g</button>
+                        <button class="btn upper" type="button">h</button>
+                        <button class="btn upper" type="button">j</button>
+                        <button class="btn upper" type="button">k</button>
+                        <button class="btn upper" type="button">l</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn upper" type="button">z</button>
+                        <button class="btn upper" type="button">x</button>
+                        <button class="btn upper" type="button">c</button>
+                        <button class="btn upper" type="button">v</button>
+                        <button class="btn upper" type="button">b</button>
+                        <button class="btn upper" type="button">n</button>
+                        <button class="btn upper" type="button">m</button>
+                        <button class="delete" type="button" id="delete"><i class="fa-solid fa-delete-left"></i></button>
+                    </div>
+                    <div class="row">
+                        <button class="space">Space</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="./assets/js/jatenho.js"></script>
+</body>
+
+</html>
