@@ -51,7 +51,7 @@ const pessoa = {
     birthday: "",
     company: "",
     personProfileId: 3,
-    responsible: false,
+    responsible: true,
     personProfileName: 'Visitante',
     accessPermission: true
 };
@@ -96,8 +96,8 @@ app.post('/api/cadastrarPessoa', (req, res) => {
 });
 
 // Informações de login
-const loginURL = 'http://10.1.1.21:8080/api/login';
-const peopleURL = 'http://10.1.1.21:8080/api/accounts/1000/people';
+const loginURL = 'http://10.0.0.23:8080/api/login';
+const peopleURL = 'http://10.0.0.23:8080/api/accounts/1000/people';
 const loginData = {
     username: 'admin',
     password: 'atmosfera123'
@@ -204,9 +204,8 @@ async function verificarCadastro2(cpf) {
 
         const pessoa = pessoas[0]; // Como estamos filtrando por CPF, deve retornar no máximo uma pessoa.
         console.log("AQUI O CPF:", cpf);
-        if (pessoa) {
-            console.log('Pessoa já cadastrada e está ativa 2:', pessoa);
-            console.log("teste", pessoa.active)
+        if(pessoa){
+            console.log("teste", pessoa);
             await cadastrarAcesso2(pessoa.id);
         }
     } catch (error) {
@@ -237,7 +236,7 @@ async function cadastrarPessoa(imagem) {
 // Função para enviar imagem da pessoa
 async function enviarImagemPessoa(id, imagem) {
     try {
-        const imageUploadURL = `http://10.1.1.21:8080/api/accounts/1000/people/${id}/image`;
+        const imageUploadURL = `http://10.0.0.23:8080/api/accounts/1000/people/${id}/image`;
         const base64Image = imagem.split(',')[1];
 
         const requestBody = { base64: base64Image };
@@ -278,7 +277,7 @@ async function cadastrarAcesso(id) {
             validity: validityI
         };
 
-        const response = await axios.post(`http://10.1.1.21:8080/api/accounts/${accountId}/people/${personId}/access`, accessData, {
+        const response = await axios.post(`http://10.0.0.23:8080/api/accounts/${accountId}/people/${personId}/access`, accessData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Cookie': sessionCookie
@@ -292,48 +291,55 @@ async function cadastrarAcesso(id) {
         throw error;
     }
 }
-
 
 async function cadastrarAcesso2(id) {
+    const accountId = 1000;
+    const personId = id;
+    console.log(personId);
+
+    const startDateVar = new Date();
+    const validityDateVar = new Date(startDateVar);
+    validityDateVar.setDate(startDateVar.getDate() + 1);
+
+    const accessData = {
+        pin: null,
+        active: true,
+        type: 3,
+        startDate: startDateVar.toISOString(),
+        validity: validityDateVar.toISOString()
+    };
+
+    const url = `http://10.0.0.23:8080/api/accounts/${accountId}/people/${personId}/access`;
+    const headers = {
+        'Content-Type': 'application/json',
+        'Cookie': sessionCookie
+    };
+
     try {
-        const accountId = 1000;
-        const personId = id;
-        const startDateVar = new Date(); // Obtém a data e hora atuais
-        const validityDateVar = new Date(startDateVar); // Clona a data inicial
-
-        validityDateVar.setDate(startDateVar.getDate() + 1); // Adiciona 1 dia
-
-        // Converte para o formato ISO 8601 (padrão esperado)
-        const startDateI = startDateVar.toISOString();
-        const validityI = validityDateVar.toISOString();
-        const accessData = {
-            pin: null,
-            active: true,
-            type: 3,
-            startDate: startDateI,
-            validity: validityI
-        };
-
-        const response = await axios.put(`http://10.1.1.21:8080/api/accounts/${accountId}/people/${personId}/access`, accessData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': sessionCookie
-            }
-        });
-
+        const response = await axios.post(url, accessData, { headers });
         console.log('Acesso cadastrado com sucesso:', response.data);
-        await sincronizarDispositivo(accountId, personId);
     } catch (error) {
-        console.error('Erro ao cadastrar acesso:', error.response ? error.response.data : error.message);
-        throw error;
+        console.error('Erro na requisição POST:', error.response ? error.response.data : error.message);
+        if (error.response) {
+            try {
+                const response = await axios.put(url, accessData, { headers });
+                console.log('Acesso atualizado com sucesso:', response.data);
+            } catch (putError) {
+                console.error('Erro na requisição PUT:', putError.response ? putError.response.data : putError.message);
+                throw putError;
+            }
+        } else {
+            throw error; 
+        }
     }
-}
 
+    await sincronizarDispositivo(accountId, personId);
+}
 
 // Função para sincronizar dispositivo
 async function sincronizarDispositivo(accountId, personId) {
     try {
-        const syncUrl = `http://10.1.1.21:8080/api/accounts/${accountId}/people/${personId}/synchronize`;
+        const syncUrl = `http://10.0.0.23:8080/api/accounts/${accountId}/people/${personId}/synchronize`;
 
         const syncResponse = await axios.put(syncUrl, {}, {
             headers: {
